@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
-      // builder: DevicePreview.appBuilder,
+      //builder: DevicePreview.appBuilder,
       title: 'Flutter Responsive App',
       theme: lightTheme,
       darkTheme: darkTheme,
