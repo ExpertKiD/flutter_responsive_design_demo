@@ -8,17 +8,17 @@ class HomePage extends StatelessWidget {
     return Scaffold(body: OrientationBuilder(
       builder: (ctx, orientation) {
         return orientation == Orientation.portrait
-            ? _portraitOrientaitonWidget()
-            : _landscapeOrientaitonWidget();
+            ? _buildPortraitLayout()
+            : _buildLandscapeLayout();
       },
     ));
   }
 
-  Widget _landscapeOrientaitonWidget() {
+  Widget _buildLandscapeLayout() {
     return const Center(child: Text("Landscape"));
   }
 
-  Widget _portraitOrientaitonWidget() {
+  Widget _buildPortraitLayout() {
     return const Center(child: Text("Portrait"));
   }
 }
