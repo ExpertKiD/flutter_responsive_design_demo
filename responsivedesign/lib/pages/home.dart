@@ -5,6 +5,20 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Container());
+    return Scaffold(body: OrientationBuilder(
+      builder: (ctx, orientation) {
+        return orientation == Orientation.portrait
+            ? _portraitOrientaitonWidget()
+            : _landscapeOrientaitonWidget();
+      },
+    ));
+  }
+
+  Widget _landscapeOrientaitonWidget() {
+    return const Center(child: Text("Landscape"));
+  }
+
+  Widget _portraitOrientaitonWidget() {
+    return const Center(child: Text("Portrait"));
   }
 }
