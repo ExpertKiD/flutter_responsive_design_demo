@@ -6,10 +6,15 @@ import 'package:logger/logger.dart';
 import 'app/app.dart';
 
 final log = Logger();
+const enableDevicePreview = false;
 
 void main() {
-  runApp(DevicePreview(
-    builder: (builder) => const MyApp(),
-    enabled: !kReleaseMode,
-  ));
+  if (enableDevicePreview) {
+    runApp(DevicePreview(
+      builder: (builder) => const MyApp(),
+      enabled: !kReleaseMode,
+    ));
+  } else {
+    runApp(const MyApp());
+  }
 }
