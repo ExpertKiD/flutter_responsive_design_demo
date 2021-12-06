@@ -15,10 +15,36 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildLandscapeLayout() {
-    return const Center(child: Text("Landscape"));
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth >= 600) {
+          return const Center(
+            child: Text("sw600-landscape"),
+          );
+        } else {
+          return const Center(
+            child: Text("mw600-landscape"),
+          );
+        }
+      },
+    );
+
+    ;
   }
 
   Widget _buildPortraitLayout() {
-    return const Center(child: Text("Portrait"));
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth >= 600) {
+          return const Center(
+            child: Text("sw600-portrait"),
+          );
+        } else {
+          return const Center(
+            child: Text("mw600-portrait"),
+          );
+        }
+      },
+    );
   }
 }
