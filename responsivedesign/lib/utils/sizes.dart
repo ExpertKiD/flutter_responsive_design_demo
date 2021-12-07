@@ -32,20 +32,20 @@ class TabletSize {
 }
 
 class ScreenSize {
-  final TabletSize portraitTablet = TabletSize(
+  static final TabletSize portraitTablet = TabletSize(
     smallTabletMaxWidth: 720,
     largeTabletMaxWidth: 840,
     smallTabletMaxHeight: 1024,
     largeTabletMaxHeight: 1280,
   );
-  final TabletSize landscapeTablet = TabletSize(
+  static final TabletSize landscapeTablet = TabletSize(
     smallTabletMaxWidth: 1024,
     largeTabletMaxWidth: 1280,
     smallTabletMaxHeight: 720,
     largeTabletMaxHeight: 840,
   );
 
-  final PhoneSize portraitPhone = PhoneSize(
+  static final PhoneSize portraitPhone = PhoneSize(
     smallPhoneMaxWidth: 360,
     mediumPhoneMaxWidth: 400,
     largePhoneMaxWidth: 600,
@@ -54,7 +54,7 @@ class ScreenSize {
     largePhoneMaxHeight: 960,
   );
 
-  final PhoneSize landscapePhone = PhoneSize(
+  static final PhoneSize landscapePhone = PhoneSize(
     smallPhoneMaxWidth: 600,
     mediumPhoneMaxWidth: 720,
     largePhoneMaxWidth: 960,
