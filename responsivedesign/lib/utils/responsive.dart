@@ -98,17 +98,13 @@ class ResponsiveWidget extends StatelessWidget {
               largeTabletPortraitWidget != null,
           "At least one breakpoint widget must be provided for portrait mode");
 
-      // Temporary variables to store breakpoint updated widgets
       Widget? tmpSmallPhoneWidget,
           tmpMediumPhoneWidget,
           tmpLargePhoneWidget,
           tmpSmallTabletWidget,
           tmpLargeTabletWidget;
 
-      assert(smallPhonePortraitWidget != null,
-          "smallPhonePortraitWidget must be provided");
-
-      // For portrait mode, update widgets according to breakpoints
+      assert(smallPhonePortraitWidget != null);
       if (smallPhonePortraitWidget != null) {
         tmpSmallPhoneWidget = smallPhonePortraitWidget;
         tmpMediumPhoneWidget =
@@ -122,6 +118,7 @@ class ResponsiveWidget extends StatelessWidget {
       }
 
       if (mediumPhonePortraitWidget != null) {
+        tmpMediumPhoneWidget = mediumPhonePortraitWidget;
         tmpLargePhoneWidget =
             largePhonePortraitWidget ?? mediumPhonePortraitWidget;
         tmpSmallTabletWidget =
@@ -131,6 +128,7 @@ class ResponsiveWidget extends StatelessWidget {
       }
 
       if (largePhonePortraitWidget != null) {
+        tmpLargePhoneWidget = largePhonePortraitWidget;
         tmpSmallTabletWidget =
             smallTabletPortraitWidget ?? largePhonePortraitWidget;
         tmpLargeTabletWidget =
@@ -138,94 +136,88 @@ class ResponsiveWidget extends StatelessWidget {
       }
 
       if (smallTabletPortraitWidget != null) {
+        tmpSmallTabletWidget = smallTabletPortraitWidget;
         tmpLargeTabletWidget =
             largeTabletPortraitWidget ?? smallTabletPortraitWidget;
       }
 
-      // assign temp to original widgets
+      if (largeTabletPortraitWidget != null) {
+        tmpLargeTabletWidget = largeTabletPortraitWidget;
+      }
+
       smallPhonePortraitWidget = tmpSmallPhoneWidget;
       mediumPhonePortraitWidget = tmpMediumPhoneWidget;
       largePhonePortraitWidget = tmpLargePhoneWidget;
       smallTabletPortraitWidget = tmpSmallTabletWidget;
       largeTabletPortraitWidget = tmpLargeTabletWidget;
 
-      if (portraitOnly == false) {
-        assert(portraitOnly == false,
-            "portraitOnly can't be true. Landscape mode must be supported here.");
-
-        // If landscape mode is supported
-        if (usePortraitWidgetsForLandscape == true) {
-          // If usePortraitWidgetsForLandscape == true, use portrait widgets for landscape according to breakpoints for landscape
-          smallPhoneLandscapeWidget = smallPhonePortraitWidget;
-          mediumPhoneLandscapeWidget = mediumPhonePortraitWidget;
-          largePhoneLandscapeWidget = largePhonePortraitWidget;
-          smallTabletLandscapeWidget = smallTabletPortraitWidget;
-          largeTabletLandscapeWidget = largeTabletPortraitWidget;
-        } else {
-          assert(usePortraitWidgetsForLandscape != true,
-              "usePortraitWidgetsForLandscape must be false");
-
-          // Temporary variables to store breakpoint updated widgets
-          Widget? tmpSmallPhoneWidget1,
-              tmpMediumPhoneWidget1,
-              tmpLargePhoneWidget1,
-              tmpSmallTabletWidget1,
-              tmpLargeTabletWidget1;
-
-          assert(
-              smallPhoneLandscapeWidget != null ||
-                  mediumPhoneLandscapeWidget != null ||
-                  largePhoneLandscapeWidget != null ||
-                  smallTabletLandscapeWidget != null ||
-                  largeTabletLandscapeWidget != null,
-              "At least one breakpoint widget must be provided for landscape mode");
-
-          // For landscape mode, update widgets according to breakpoints
-          assert(
-              portraitOnly == false && usePortraitWidgetsForLandscape == false,
-              "portraitOnly can't be true. Landscape mode must be supported here.");
-          if (smallPhoneLandscapeWidget != null) {
-            tmpSmallPhoneWidget1 = smallPhoneLandscapeWidget;
-            tmpMediumPhoneWidget1 =
-                mediumPhoneLandscapeWidget ?? smallPhoneLandscapeWidget;
-            tmpLargePhoneWidget1 =
-                largePhoneLandscapeWidget ?? smallPhoneLandscapeWidget;
-            tmpSmallTabletWidget1 =
-                smallTabletLandscapeWidget ?? smallPhoneLandscapeWidget;
-            tmpLargeTabletWidget1 =
-                largeTabletLandscapeWidget ?? smallPhoneLandscapeWidget;
-          }
-
-          if (mediumPhoneLandscapeWidget != null) {
-            tmpLargePhoneWidget1 =
-                largePhoneLandscapeWidget ?? mediumPhoneLandscapeWidget;
-            tmpSmallTabletWidget1 =
-                smallTabletPortraitWidget ?? mediumPhoneLandscapeWidget;
-            tmpLargeTabletWidget1 =
-                largeTabletLandscapeWidget ?? mediumPhoneLandscapeWidget;
-          }
-
-          if (largePhoneLandscapeWidget != null) {
-            tmpSmallTabletWidget1 =
-                smallTabletLandscapeWidget ?? largePhoneLandscapeWidget;
-            tmpLargeTabletWidget1 =
-                largeTabletPortraitWidget ?? largePhoneLandscapeWidget;
-          }
-
-          if (smallTabletLandscapeWidget != null) {
-            tmpLargeTabletWidget1 =
-                largeTabletLandscapeWidget ?? smallTabletLandscapeWidget;
-          }
-
-          // assign temp to original widgets
-          smallPhoneLandscapeWidget = tmpSmallPhoneWidget1;
-          mediumPhoneLandscapeWidget = tmpMediumPhoneWidget1;
-          largePhoneLandscapeWidget = tmpLargePhoneWidget1;
-          smallTabletLandscapeWidget = tmpSmallTabletWidget1;
-          largeTabletLandscapeWidget = tmpLargeTabletWidget1;
-        }
+      if (usePortraitWidgetsForLandscape == true) {
+        smallPhoneLandscapeWidget = smallPhonePortraitWidget;
+        mediumPhoneLandscapeWidget = mediumPhonePortraitWidget;
+        largePhoneLandscapeWidget = largePhonePortraitWidget;
+        smallTabletLandscapeWidget = smallTabletPortraitWidget;
+        largeTabletLandscapeWidget = largeTabletPortraitWidget;
       } else {
-        assert(useBreakpoints != true, "Breakpoints has not been enabled");
+        assert(
+            smallPhoneLandscapeWidget != null ||
+                mediumPhoneLandscapeWidget != null ||
+                largePhoneLandscapeWidget != null ||
+                smallTabletLandscapeWidget != null ||
+                largeTabletLandscapeWidget != null,
+            "At least one breakpoint widget must be provided for portrait mode");
+
+        Widget? tmpSmallPhoneWidget,
+            tmpMediumPhoneWidget,
+            tmpLargePhoneWidget,
+            tmpSmallTabletWidget,
+            tmpLargeTabletWidget;
+
+        assert(smallPhonePortraitWidget != null);
+        if (smallPhoneLandscapeWidget != null) {
+          tmpSmallPhoneWidget = smallPhoneLandscapeWidget;
+          tmpMediumPhoneWidget =
+              mediumPhoneLandscapeWidget ?? smallPhoneLandscapeWidget;
+          tmpLargePhoneWidget =
+              largePhoneLandscapeWidget ?? smallPhoneLandscapeWidget;
+          tmpSmallTabletWidget =
+              smallTabletLandscapeWidget ?? smallPhoneLandscapeWidget;
+          tmpLargeTabletWidget =
+              largeTabletLandscapeWidget ?? smallPhoneLandscapeWidget;
+        }
+
+        if (mediumPhoneLandscapeWidget != null) {
+          tmpMediumPhoneWidget = mediumPhoneLandscapeWidget;
+          tmpLargePhoneWidget =
+              largePhoneLandscapeWidget ?? mediumPhoneLandscapeWidget;
+          tmpSmallTabletWidget =
+              smallTabletLandscapeWidget ?? mediumPhoneLandscapeWidget;
+          tmpLargeTabletWidget =
+              largeTabletLandscapeWidget ?? mediumPhoneLandscapeWidget;
+        }
+
+        if (largePhoneLandscapeWidget != null) {
+          tmpLargePhoneWidget = largePhoneLandscapeWidget;
+          tmpSmallTabletWidget =
+              smallTabletLandscapeWidget ?? largePhoneLandscapeWidget;
+          tmpLargeTabletWidget =
+              largeTabletLandscapeWidget ?? largePhoneLandscapeWidget;
+        }
+
+        if (smallTabletLandscapeWidget != null) {
+          tmpSmallTabletWidget = smallTabletLandscapeWidget;
+          tmpLargeTabletWidget =
+              largeTabletLandscapeWidget ?? smallTabletLandscapeWidget;
+        }
+
+        if (largeTabletLandscapeWidget != null) {
+          tmpLargeTabletWidget = largeTabletLandscapeWidget;
+        }
+
+        smallPhoneLandscapeWidget = tmpSmallPhoneWidget;
+        mediumPhoneLandscapeWidget = tmpMediumPhoneWidget;
+        largePhoneLandscapeWidget = tmpLargePhoneWidget;
+        smallTabletLandscapeWidget = tmpSmallTabletWidget;
+        largeTabletLandscapeWidget = tmpLargeTabletWidget;
       }
     }
 
@@ -314,28 +306,28 @@ class ResponsiveWidget extends StatelessWidget {
   Widget _responsivePortraitLayout() {
     return LayoutBuilder(
       builder: (context, constraints) {
-        if (constraints.maxWidth <=
+        if (constraints.maxWidth.roundToDouble() <
             ScreenSize.portraitPhone.smallPhoneMaxWidth) {
           // if small phone
           return _smallPhonePortraitWidget;
-        } else if (constraints.maxWidth <=
+        } else if (constraints.maxWidth.roundToDouble() <
             ScreenSize.portraitPhone.mediumPhoneMaxWidth) {
           // if medium phone
           return _mediumPhonePortraitWidget;
-        } else if (constraints.maxWidth <=
+        } else if (constraints.maxWidth.roundToDouble() <
             ScreenSize.portraitPhone.largePhoneMaxWidth) {
           // if large phone
           return _largePhonePortraitWidget;
-        } else if (constraints.maxWidth <=
+        } else if (constraints.maxWidth.roundToDouble() <
             ScreenSize.portraitTablet.smallTabletMaxWidth) {
           // if small tablet
           return _smallTabletPortraitWidget;
-        } else if (constraints.maxWidth <=
+        } else if (constraints.maxWidth.roundToDouble() <
             ScreenSize.portraitTablet.largeTabletMaxWidth) {
           // if large tablet
           return _largeTabletPortraitWidget;
         } else {
-          // return default largeTablet screen if maxWidth greater than tablet widget
+          // return default largeTablet screen if maxWidth.roundToDouble() greater than tablet widget
           return _largeTabletPortraitWidget;
         }
       },
@@ -345,23 +337,23 @@ class ResponsiveWidget extends StatelessWidget {
   Widget _responsiveLandscapeLayout() {
     return LayoutBuilder(
       builder: (context, constraints) {
-        if (constraints.maxWidth <=
+        if (constraints.maxWidth.roundToDouble() <
             ScreenSize.landscapePhone.smallPhoneMaxWidth) {
           // if small phone in landscape
           return _smallPhoneLandscapeWidget;
-        } else if (constraints.maxWidth <=
+        } else if (constraints.maxWidth.roundToDouble() <
             ScreenSize.landscapePhone.mediumPhoneMaxWidth) {
           // if medium phone in landscape
           return _mediumPhoneLandscapeWidget;
-        } else if (constraints.maxWidth <=
+        } else if (constraints.maxWidth.roundToDouble() <
             ScreenSize.landscapePhone.largePhoneMaxWidth) {
           // if large phone in landscape
           return _largePhoneLandscapeWidget;
-        } else if (constraints.maxWidth <=
+        } else if (constraints.maxWidth.roundToDouble() <
             ScreenSize.landscapeTablet.smallTabletMaxWidth) {
           // if small tablet in landscape
           return _smallTabletLandscapeWidget;
-        } else if (constraints.maxWidth <=
+        } else if (constraints.maxWidth.roundToDouble() <
             ScreenSize.landscapeTablet.largeTabletMaxWidth) {
           // if large tablet in landscape
           return _largeTabletLandscapeWidget;
